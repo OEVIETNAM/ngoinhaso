@@ -21,7 +21,7 @@ const du_an = (await getCollection('posts')).sort(
       </div>
     </a>
   ))}
-  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào được đăng.</p>}
+  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào.</p>}
 </section>
 
 <style>
@@ -45,6 +45,11 @@ const du_an = (await getCollection('posts')).sort(
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+    filter: grayscale(20%);
+    transition: filter 0.2s ease;
+  }
+  .the-du-an:hover img {
+    filter: grayscale(0%);
   }
   .noi-dung-the {
     padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
