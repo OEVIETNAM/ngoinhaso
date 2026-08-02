@@ -1,7 +1,7 @@
 name: Xay dung va xuat ban
 on:
   push:
-    branches: [main]
+    branches: [chuan]
 
 permissions:
   contents: read
