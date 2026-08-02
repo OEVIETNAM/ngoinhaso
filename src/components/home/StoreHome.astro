@@ -13,69 +13,107 @@ function dinh_dang_gia(gia: number, don_vi: string) {
 ---
 
 <section class="mo-dau">
-  <p class="nhan-chuyen-muc">{site_config.mo_ta_ngan}</p>
+  <span class="nhan-huy-hieu">Cửa hàng</span>
   <h1>{site_config.ten_hien_thi}</h1>
-  <p class="chu-mo">{site_config.loi_chao}</p>
+  <p class="chu-mo mo-ta-lon">{site_config.loi_chao}</p>
 </section>
 
-<section class="luoi-tap-chi-san-pham">
-  {san_pham.map((sp) => (
-    <div class="o-san-pham khoi-phu">
-      <img src={sp.data.anh} alt={sp.data.ten_san_pham} />
-      <div class="nhan-du-an">
-        <h3>{sp.data.ten_san_pham}</h3>
-        <p class="gia">{dinh_dang_gia(sp.data.gia, sp.data.don_vi_tien)}</p>
+<section class="phan-san-pham">
+  <div class="tieu-de-phan">
+    <h2>Sản phẩm</h2>
+    <p class="chu-mo">{san_pham.length} sản phẩm đang bán</p>
+  </div>
+
+  <div class="luoi-san-pham">
+    {san_pham.map((sp, chi_so) => (
+      <div class="the-san-pham khoi-phu">
+        <div class="khung-anh">
+          <img src={sp.data.anh} alt={sp.data.ten_san_pham} />
+          {chi_so === 0 && <span class="nhan-noi-bat">Nổi bật</span>}
+        </div>
+        <div class="noi-dung-the">
+          <h3>{sp.data.ten_san_pham}</h3>
+          {sp.data.mo_ta && <p class="chu-mo mo-ta-ngan">{sp.data.mo_ta}</p>}
+          <p class="gia">{dinh_dang_gia(sp.data.gia, sp.data.don_vi_tien)}</p>
+        </div>
       </div>
-    </div>
-  ))}
-  {san_pham.length === 0 && <p class="chu-mo">Chưa có sản phẩm nào.</p>}
+    ))}
+    {san_pham.length === 0 && <p class="chu-mo">Chưa có sản phẩm nào.</p>}
+  </div>
 </section>
 
 <style>
   .mo-dau {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
-    border-bottom: 1px solid var(--mau-vien);
-  }
-  .nhan-chuyen-muc {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.75rem;
-    color: var(--mau-nhan-manh);
-    font-weight: 700;
+    text-align: center;
   }
   .mo-dau h1 {
-    font-size: 2.75rem;
-    margin: 0.4rem 0;
+    font-size: 2.5rem;
+    margin: 0.75rem 0 0.5rem;
   }
-  .luoi-tap-chi-san-pham {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--khoang-cach-vua);
+  .mo-ta-lon {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .phan-san-pham {
     padding: var(--khoang-cach-vua) 0 var(--khoang-cach-lon);
   }
-  .o-san-pham {
-    position: relative;
+  .tieu-de-phan {
+    margin-bottom: var(--khoang-cach-vua);
+  }
+  .tieu-de-phan h2 {
+    margin: 0 0 0.2rem;
+    font-size: 1.6rem;
+  }
+  .luoi-san-pham {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: var(--khoang-cach-vua);
+  }
+  .the-san-pham {
     overflow: hidden;
   }
-  .o-san-pham img {
+  .khung-anh {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
+  }
+  .khung-anh img {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
   }
-  .nhan-du-an {
-    padding: var(--khoang-cach-nho) 0.2rem;
+  .the-san-pham:hover .khung-anh img {
+    transform: scale(1.05);
   }
-  .nhan-du-an h3 {
-    margin: 0 0 0.25rem;
+  .nhan-noi-bat {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--mau-nhan-manh);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+  }
+  .noi-dung-the {
+    padding: var(--khoang-cach-vua);
+  }
+  .noi-dung-the h3 {
+    margin: 0 0 0.3rem;
     font-size: 1rem;
+  }
+  .mo-ta-ngan {
+    font-size: 0.85rem;
+    margin: 0 0 0.5rem;
   }
   .gia {
     margin: 0;
     font-weight: 700;
+    font-size: 1.1rem;
     color: var(--mau-nhan-manh);
-  }
-  @media (max-width: 900px) {
-    .luoi-tap-chi-san-pham { grid-template-columns: repeat(2, 1fr); }
   }
 </style>

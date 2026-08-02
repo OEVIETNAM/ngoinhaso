@@ -3,27 +3,33 @@ import { site_config } from '../../site.config';
 ---
 
 <section id="gioi-thieu" class="khoi-hero">
-  <p class="nhan-chuyen-muc">{site_config.mo_ta_ngan}</p>
+  <span class="nhan-huy-hieu">{site_config.mo_ta_ngan}</span>
   <h1>{site_config.ten_hien_thi}</h1>
-  <p class="chu-mo loi-chao">{site_config.loi_chao}</p>
-  <a class="nut" href="#lien-he">Liên hệ ngay</a>
+  <p class="chu-mo mo-ta-lon">{site_config.loi_chao}</p>
+  <div class="hang-nut">
+    <a class="nut" href="#lien-he">Liên hệ ngay →</a>
+    <a class="nut nut-vien" href="#dich-vu">Xem dịch vụ</a>
+  </div>
 </section>
 
 <section id="dich-vu" class="khoi-dich-vu">
-  <h2>Dịch vụ / Tính năng</h2>
+  <div class="tieu-de-phan tieu-de-giua">
+    <h2>Dịch vụ / Tính năng</h2>
+    <p class="chu-mo">Những gì chúng tôi mang lại cho bạn</p>
+  </div>
   <div class="luoi-dich-vu">
     <div class="the khoi-phu">
-      <span class="so-thu-tu">01</span>
+      <span class="icon-vuong">💎</span>
       <h3>Chất lượng</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng đầu tiên.</p>
     </div>
     <div class="the khoi-phu">
-      <span class="so-thu-tu">02</span>
+      <span class="icon-vuong">🤝</span>
       <h3>Tận tâm</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ hai.</p>
     </div>
     <div class="the khoi-phu">
-      <span class="so-thu-tu">03</span>
+      <span class="icon-vuong">⚡</span>
       <h3>Nhanh chóng</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ ba.</p>
     </div>
@@ -31,17 +37,22 @@ import { site_config } from '../../site.config';
 </section>
 
 <section class="khoi-cta">
-  <h2>Sẵn sàng bắt đầu?</h2>
-  <a class="nut" href="#lien-he">Liên hệ với {site_config.ten_hien_thi}</a>
+  <div class="noi-dung-cta">
+    <h2>Sẵn sàng bắt đầu?</h2>
+    <p class="chu-mo">Liên hệ ngay hôm nay để được tư vấn miễn phí.</p>
+    <a class="nut" href="#lien-he">Liên hệ với {site_config.ten_hien_thi} →</a>
+  </div>
 </section>
 
 <section id="lien-he" class="khoi-lien-he">
-  <h2>Liên hệ</h2>
-  <ul>
-    {site_config.lien_he.email && <li>Email: {site_config.lien_he.email}</li>}
-    {site_config.lien_he.dien_thoai && <li>Điện thoại: {site_config.lien_he.dien_thoai}</li>}
+  <div class="tieu-de-phan tieu-de-giua">
+    <h2>Liên hệ</h2>
+  </div>
+  <ul class="danh-sach-lien-he">
+    {site_config.lien_he.email && <li class="khoi-phu">Email: {site_config.lien_he.email}</li>}
+    {site_config.lien_he.dien_thoai && <li class="khoi-phu">Điện thoại: {site_config.lien_he.dien_thoai}</li>}
     {site_config.lien_he.mang_xa_hoi?.map((mang) => (
-      <li><a href={mang.duong_dan} target="_blank" rel="noopener noreferrer">{mang.ten}</a></li>
+      <li class="khoi-phu"><a href={mang.duong_dan} target="_blank" rel="noopener noreferrer">{mang.ten}</a></li>
     ))}
   </ul>
 </section>
@@ -49,61 +60,100 @@ import { site_config } from '../../site.config';
 <style>
   .khoi-hero {
     padding: var(--khoang-cach-lon) 0;
-    border-bottom: 1px solid var(--mau-vien);
-  }
-  .nhan-chuyen-muc {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.75rem;
-    color: var(--mau-nhan-manh);
-    font-weight: 700;
+    text-align: center;
   }
   .khoi-hero h1 {
     font-size: 3rem;
-    margin: 0.4rem 0;
+    margin: 0.75rem 0 0.5rem;
   }
-  .loi-chao {
-    max-width: 640px;
-    font-size: 1.1rem;
+  .mo-ta-lon {
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.15rem;
+  }
+  .hang-nut {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .nut-vien {
+    background: transparent;
+    color: var(--mau-chu);
+    border: 1px solid var(--mau-vien);
+    box-shadow: none;
   }
   .khoi-dich-vu {
     padding: var(--khoang-cach-lon) 0;
   }
+  .tieu-de-phan h2 {
+    margin: 0 0 0.2rem;
+    font-size: 1.75rem;
+  }
+  .tieu-de-giua {
+    text-align: center;
+    margin-bottom: var(--khoang-cach-vua);
+  }
   .luoi-dich-vu {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--khoang-cach-vua);
   }
   .the {
     padding: var(--khoang-cach-vua);
-    border-left: 1px solid var(--mau-vien);
+    text-align: center;
   }
-  .so-thu-tu {
-    font-family: var(--font-mac-dinh-tieu-de);
-    font-size: 1.5rem;
-    color: var(--mau-nhan-manh);
+  .icon-vuong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--mau-nhan-manh-nhat);
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
   }
   .the h3 {
     margin: 0.3rem 0;
   }
   .khoi-cta {
-    text-align: center;
     padding: var(--khoang-cach-lon) 0;
-    border-top: 1px solid var(--mau-vien);
-    border-bottom: 1px solid var(--mau-vien);
+  }
+  .noi-dung-cta {
+    text-align: center;
+    padding: var(--khoang-cach-lon) var(--khoang-cach-vua);
+    border-radius: var(--do-bo-goc);
+    background: linear-gradient(135deg, var(--mau-nhan-manh), #4338c9);
+    color: #fff;
+  }
+  .noi-dung-cta h2 {
+    margin: 0 0 0.4rem;
+    color: #fff;
+  }
+  .noi-dung-cta .chu-mo {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.25rem;
+  }
+  .noi-dung-cta .nut {
+    background: #fff;
+    color: var(--mau-nhan-manh);
+    box-shadow: none;
   }
   .khoi-lien-he {
     padding: var(--khoang-cach-lon) 0;
   }
-  .khoi-lien-he ul {
+  .danh-sach-lien-he {
     list-style: none;
     padding: 0;
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--khoang-cach-nho);
   }
-  .khoi-lien-he li {
-    margin-bottom: var(--khoang-cach-nho);
-  }
-  @media (max-width: 760px) {
-    .luoi-dich-vu { grid-template-columns: 1fr; }
-    .the { border-left: none; border-top: 1px solid var(--mau-vien); }
+  .danh-sach-lien-he li {
+    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+    text-align: center;
   }
 </style>

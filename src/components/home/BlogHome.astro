@@ -9,89 +9,147 @@ const [bai_noi_bat, ...bai_con_lai] = bai_viet;
 ---
 
 <section class="mo-dau">
-  <p class="nhan-chuyen-muc">{site_config.mo_ta_ngan}</p>
+  <span class="nhan-huy-hieu">Blog</span>
   <h1>{site_config.ten_hien_thi}</h1>
-  <p class="chu-mo loi-chao">{site_config.loi_chao}</p>
+  <p class="chu-mo mo-ta-lon">{site_config.loi_chao}</p>
 </section>
 
 {bai_noi_bat && (
-  <a class="bai-noi-bat" href={`/blog/${bai_noi_bat.slug}`}>
-    {bai_noi_bat.data.cover && <img src={bai_noi_bat.data.cover} alt={bai_noi_bat.data.title} />}
+  <a class="bai-noi-bat khoi-phu" href={`/blog/${bai_noi_bat.slug}`}>
+    {bai_noi_bat.data.cover && (
+      <div class="khung-anh-lon">
+        <img src={bai_noi_bat.data.cover} alt={bai_noi_bat.data.title} />
+      </div>
+    )}
     <div class="noi-dung-noi-bat">
-      <span class="nhan-chuyen-muc">Bài mới nhất</span>
+      <span class="nhan-huy-hieu">Bài mới nhất</span>
       <h2>{bai_noi_bat.data.title}</h2>
       <p class="chu-mo">{new Date(bai_noi_bat.data.date).toLocaleDateString('vi-VN')}</p>
     </div>
   </a>
 )}
 
-<section class="luoi-bao">
-  {bai_con_lai.map((bai) => (
-    <a class="the-bai khoi-phu" href={`/blog/${bai.slug}`}>
-      <h3>{bai.data.title}</h3>
-      <p class="chu-mo">
-        {new Date(bai.data.date).toLocaleDateString('vi-VN')}
-        {bai.data.tags.length > 0 && ` — ${bai.data.tags.join(', ')}`}
-      </p>
-    </a>
-  ))}
+<section class="phan-danh-sach">
+  <div class="luoi-bai">
+    {bai_con_lai.map((bai) => (
+      <a class="the-bai khoi-phu" href={`/blog/${bai.slug}`}>
+        {bai.data.cover && (
+          <div class="khung-anh">
+            <img src={bai.data.cover} alt={bai.data.title} />
+          </div>
+        )}
+        <div class="noi-dung-the">
+          <h3>{bai.data.title}</h3>
+          <p class="chu-mo ngay-dang">{new Date(bai.data.date).toLocaleDateString('vi-VN')}</p>
+          {bai.data.tags.length > 0 && (
+            <div class="hang-the-phu">
+              {bai.data.tags.slice(0, 3).map((t) => <span class="the-phu">{t}</span>)}
+            </div>
+          )}
+        </div>
+      </a>
+    ))}
+  </div>
   {bai_viet.length === 0 && <p class="chu-mo">Chưa có bài viết nào.</p>}
 </section>
 
 <style>
   .mo-dau {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
-    border-bottom: 1px solid var(--mau-vien);
-  }
-  .nhan-chuyen-muc {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.75rem;
-    color: var(--mau-nhan-manh);
-    font-weight: 700;
+    text-align: center;
   }
   .mo-dau h1 {
-    font-size: 2.75rem;
-    margin: 0.4rem 0;
+    font-size: 2.5rem;
+    margin: 0.75rem 0 0.5rem;
   }
-  .loi-chao {
-    max-width: 640px;
+  .mo-ta-lon {
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 1.05rem;
   }
   .bai-noi-bat {
-    display: block;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: stretch;
     text-decoration: none;
     color: var(--mau-chu);
-    padding: var(--khoang-cach-vua) 0;
-    border-bottom: 1px solid var(--mau-vien);
+    overflow: hidden;
+    margin-bottom: var(--khoang-cach-lon);
   }
-  .bai-noi-bat img {
+  .khung-anh-lon {
+    overflow: hidden;
+  }
+  .khung-anh-lon img {
     width: 100%;
-    aspect-ratio: 16 / 7;
+    height: 100%;
+    min-height: 260px;
     object-fit: cover;
+    display: block;
   }
   .noi-dung-noi-bat {
-    padding-top: var(--khoang-cach-nho);
+    padding: var(--khoang-cach-vua);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
   }
   .noi-dung-noi-bat h2 {
-    font-size: 2rem;
-    margin: 0.3rem 0;
+    font-size: 1.6rem;
+    margin: 0;
   }
-  .luoi-bao {
+  .phan-danh-sach {
+    padding-bottom: var(--khoang-cach-lon);
+  }
+  .luoi-bai {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: var(--khoang-cach-vua);
-    padding: var(--khoang-cach-vua) 0 var(--khoang-cach-lon);
   }
   .the-bai {
+    display: block;
+    overflow: hidden;
     text-decoration: none;
     color: var(--mau-chu);
-    padding-top: var(--khoang-cach-nho);
   }
-  .the-bai h3 {
-    font-size: 1.15rem;
-    margin: 0 0 0.3rem;
+  .khung-anh {
+    overflow: hidden;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
   }
-  @media (max-width: 760px) {
-    .luoi-bao { grid-template-columns: 1fr; }
+  .khung-anh img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .the-bai:hover .khung-anh img {
+    transform: scale(1.05);
+  }
+  .noi-dung-the {
+    padding: var(--khoang-cach-vua);
+  }
+  .noi-dung-the h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+  }
+  .ngay-dang {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+  }
+  .hang-the-phu {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .the-phu {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: var(--mau-nen);
+    color: var(--mau-chu-nhan);
+    border: 1px solid var(--mau-vien);
+  }
+  @media (max-width: 720px) {
+    .bai-noi-bat { grid-template-columns: 1fr; }
   }
 </style>

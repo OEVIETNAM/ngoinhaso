@@ -5,83 +5,149 @@ import { site_config } from '../../site.config';
 const du_an = (await getCollection('posts')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const so_du_an = du_an.length;
+const tat_ca_the = [...new Set(du_an.flatMap((d) => d.data.tags))];
 ---
 
 <section class="mo-dau">
-  <p class="nhan-chuyen-muc">{site_config.mo_ta_ngan}</p>
+  <span class="nhan-huy-hieu">Portfolio</span>
   <h1>{site_config.ten_hien_thi}</h1>
-  <p class="chu-mo">{site_config.loi_chao}</p>
+  <p class="chu-mo mo-ta-lon">{site_config.loi_chao}</p>
+
+  <div class="hang-so-lieu">
+    <div class="so-lieu">
+      <strong>{so_du_an}</strong>
+      <span class="chu-mo">dự án</span>
+    </div>
+    {tat_ca_the.length > 0 && (
+      <div class="so-lieu">
+        <strong>{tat_ca_the.length}</strong>
+        <span class="chu-mo">lĩnh vực</span>
+      </div>
+    )}
+  </div>
 </section>
 
-<section class="luoi-tap-chi">
-  {du_an.map((bai, chi_so) => (
-    <a
-      class={`o-du-an khoi-phu ${chi_so === 0 ? 'o-lon' : ''}`}
-      href={`/blog/${bai.slug}`}
-    >
-      {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
-      <div class="nhan-du-an">
-        <h3>{bai.data.title}</h3>
-      </div>
-    </a>
-  ))}
-  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào.</p>}
+<section class="phan-du-an">
+  <div class="tieu-de-phan">
+    <h2>Dự án nổi bật</h2>
+    <p class="chu-mo">Một số công việc gần đây</p>
+  </div>
+
+  <div class="luoi-du-an">
+    {du_an.map((bai) => (
+      <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
+        {bai.data.cover && (
+          <div class="khung-anh">
+            <img src={bai.data.cover} alt={bai.data.title} />
+          </div>
+        )}
+        <div class="noi-dung-the">
+          <h3>{bai.data.title}</h3>
+          {bai.data.tags.length > 0 && (
+            <div class="hang-the-phu">
+              {bai.data.tags.slice(0, 3).map((t) => <span class="the-phu">{t}</span>)}
+            </div>
+          )}
+          <span class="lien-ket-xem">Xem chi tiết →</span>
+        </div>
+      </a>
+    ))}
+    {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào được đăng.</p>}
+  </div>
 </section>
 
 <style>
   .mo-dau {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
-    border-bottom: 1px solid var(--mau-vien);
-  }
-  .nhan-chuyen-muc {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.75rem;
-    color: var(--mau-nhan-manh);
-    font-weight: 700;
+    text-align: center;
   }
   .mo-dau h1 {
     font-size: 2.75rem;
-    margin: 0.4rem 0;
+    margin: 0.75rem 0 0.5rem;
   }
-  .luoi-tap-chi {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 220px;
-    gap: var(--khoang-cach-vua);
+  .mo-ta-lon {
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+  .hang-so-lieu {
+    display: flex;
+    justify-content: center;
+    gap: var(--khoang-cach-lon);
+    margin-top: var(--khoang-cach-vua);
+  }
+  .so-lieu {
+    display: flex;
+    flex-direction: column;
+  }
+  .so-lieu strong {
+    font-family: var(--font-mac-dinh-tieu-de);
+    font-size: 1.75rem;
+    color: var(--mau-nhan-manh);
+  }
+  .so-lieu span {
+    font-size: 0.85rem;
+  }
+  .phan-du-an {
     padding: var(--khoang-cach-vua) 0 var(--khoang-cach-lon);
   }
-  .o-du-an {
-    position: relative;
+  .tieu-de-phan {
+    margin-bottom: var(--khoang-cach-vua);
+  }
+  .tieu-de-phan h2 {
+    margin: 0 0 0.2rem;
+    font-size: 1.6rem;
+  }
+  .luoi-du-an {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--khoang-cach-vua);
+  }
+  .the-du-an {
     display: block;
     overflow: hidden;
     text-decoration: none;
+    color: var(--mau-chu);
   }
-  .o-lon {
-    grid-column: span 2;
-    grid-row: span 2;
+  .khung-anh {
+    overflow: hidden;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
   }
-  .o-du-an img {
+  .khung-anh img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
   }
-  .nhan-du-an {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+  .the-du-an:hover .khung-anh img {
+    transform: scale(1.05);
   }
-  .nhan-du-an h3 {
-    color: #fff;
-    margin: 0;
-    font-size: 1.15rem;
+  .noi-dung-the {
+    padding: var(--khoang-cach-vua);
   }
-  @media (max-width: 760px) {
-    .luoi-tap-chi { grid-template-columns: 1fr; }
-    .o-lon { grid-column: span 1; grid-row: span 1; }
+  .noi-dung-the h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  .hang-the-phu {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+  .the-phu {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: var(--mau-nen);
+    color: var(--mau-chu-nhan);
+    border: 1px solid var(--mau-vien);
+  }
+  .lien-ket-xem {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--mau-nhan-manh);
   }
 </style>

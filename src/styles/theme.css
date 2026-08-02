@@ -1,26 +1,31 @@
-/* theme.css — theme-tap-chi (Editorial/Magazine).
-   Tieu de lon kieu serif, bo cuc theo luoi bao, hop Blog & Portfolio
-   nhiep anh/viet lach. Giu nguyen ten bien theo hop dong o dac ta muc 9. */
+/* theme.css — theme-tap-chi (nang cap, lay cam hung tu Astrofy/AstroPaper).
+   Phong cach "card + accent tim", nen sang, chu ro net, nhieu khong gian
+   tho, phu hop portfolio ca nhan chuyen nghiep, blog, cua hang nho.
+   Giu nguyen ten bien theo hop dong o dac ta muc 9. */
 
 :root {
   /* Mau sac */
-  --mau-nen: #faf8f4;
+  --mau-nen: #f7f7fb;
   --mau-nen-phu: #ffffff;
-  --mau-chu: #1a1a17;
-  --mau-chu-nhan: #7a7568;
-  --mau-nhan-manh: #a3341f;
-  --mau-vien: #ddd6c9;
+  --mau-chu: #16161d;
+  --mau-chu-nhan: #6b6b7b;
+  --mau-nhan-manh: #5b4fe0;
+  --mau-vien: #e5e4f0;
+
+  /* Mau phu tro (chi dung noi bo trong theme nay, khong nam trong hop dong bat buoc) */
+  --mau-nhan-manh-nhat: #eeecfc;
+  --mau-thanh-cong: #1f9d55;
 
   /* Bo cuc */
-  --do-bo-goc: 0px;
+  --do-bo-goc: 16px;
   --khoang-cach-nho: 0.6rem;
-  --khoang-cach-vua: 1.75rem;
-  --khoang-cach-lon: 4.5rem;
-  --do-rong-noi-dung: 1040px;
+  --khoang-cach-vua: 1.5rem;
+  --khoang-cach-lon: 5rem;
+  --do-rong-noi-dung: 1080px;
 
   /* Font mac dinh cua theme */
-  --font-mac-dinh-than: 'Source Sans 3', sans-serif;
-  --font-mac-dinh-tieu-de: 'Playfair Display', serif;
+  --font-mac-dinh-than: 'Inter', sans-serif;
+  --font-mac-dinh-tieu-de: 'Montserrat', sans-serif;
 }
 
 * {
@@ -33,12 +38,12 @@ body {
   color: var(--mau-chu);
   font-family: var(--font-mac-dinh-than);
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3 {
   font-family: var(--font-mac-dinh-tieu-de);
-  font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
@@ -54,22 +59,49 @@ a {
 
 .khoi-phu {
   background: var(--mau-nen-phu);
-  border-top: 3px solid var(--mau-nhan-manh);
+  border: 1px solid var(--mau-vien);
+  border-radius: var(--do-bo-goc);
+  box-shadow: 0 1px 2px rgba(22, 22, 29, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.khoi-phu:hover {
+  box-shadow: 0 16px 32px -16px rgba(91, 79, 224, 0.25);
+  transform: translateY(-2px);
+  border-color: var(--mau-nhan-manh);
 }
 
 .nut {
-  display: inline-block;
-  padding: 0.7rem 1.4rem;
-  border-radius: var(--do-bo-goc);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
   background: var(--mau-nhan-manh);
   color: #fff;
   text-decoration: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 10px 24px -10px rgba(91, 79, 224, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nut:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px -10px rgba(91, 79, 224, 0.65);
 }
 
 .chu-mo {
   color: var(--mau-chu-nhan);
+}
+
+/* Tien ich chung tai su dung o nhieu Home component */
+.nhan-huy-hieu {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: var(--mau-nhan-manh-nhat);
+  color: var(--mau-nhan-manh);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
