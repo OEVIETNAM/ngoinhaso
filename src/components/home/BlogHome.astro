@@ -8,20 +8,23 @@ const bai_viet = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
+  <span class="huy-hieu">👋 Xin chào</span>
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
-<section class="danh-sach-bai">
+<section class="luoi-bai">
   {bai_viet.map((bai) => (
-    <a class="the-bai-viet khoi-phu" href={`/blog/${bai.slug}`}>
+    <a class="the-bai khoi-phu" href={`/blog/${bai.slug}`}>
       {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
       <div class="noi-dung-the">
-        <h2>{bai.data.title}</h2>
-        <p class="chu-mo">
-          {new Date(bai.data.date).toLocaleDateString('vi-VN')}
-          {bai.data.tags.length > 0 && ` · ${bai.data.tags.join(', ')}`}
-        </p>
+        <h3>{bai.data.title}</h3>
+        <p class="chu-mo">{new Date(bai.data.date).toLocaleDateString('vi-VN')}</p>
+        {bai.data.tags.length > 0 && (
+          <div class="hang-nhan">
+            {bai.data.tags.map((t) => <span class="nhan">{t}</span>)}
+          </div>
+        )}
       </div>
     </a>
   ))}
@@ -31,32 +34,57 @@ const bai_viet = (await getCollection('posts')).sort(
 <style>
   .mo-dau {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
+    text-align: center;
   }
-  .danh-sach-bai {
-    display: flex;
-    flex-direction: column;
+  .huy-hieu {
+    display: inline-block;
+    background: var(--mau-vien);
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+  .mo-dau h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+  }
+  .luoi-bai {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--khoang-cach-vua);
     padding-bottom: var(--khoang-cach-lon);
   }
-  .the-bai-viet {
-    display: flex;
-    gap: var(--khoang-cach-vua);
+  .the-bai {
+    display: block;
+    overflow: hidden;
     text-decoration: none;
     color: var(--mau-chu);
-    overflow: hidden;
   }
-  .the-bai-viet img {
-    width: 160px;
-    height: 110px;
+  .the-bai img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
-    flex-shrink: 0;
-    border-radius: var(--do-bo-goc);
+    display: block;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
   }
   .noi-dung-the {
-    padding: var(--khoang-cach-nho);
+    padding: var(--khoang-cach-vua);
   }
-  .noi-dung-the h2 {
-    margin: 0 0 0.25rem;
-    font-size: 1.15rem;
+  .noi-dung-the h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.2rem;
+  }
+  .hang-nhan {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+  .nhan {
+    background: var(--mau-vien);
+    color: var(--mau-chu);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
   }
 </style>

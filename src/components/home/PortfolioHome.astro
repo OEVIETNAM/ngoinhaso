@@ -8,6 +8,7 @@ const du_an = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
+  <span class="huy-hieu">✨ Portfolio</span>
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
@@ -21,16 +22,29 @@ const du_an = (await getCollection('posts')).sort(
       </div>
     </a>
   ))}
-  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào được đăng.</p>}
+  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào.</p>}
 </section>
 
 <style>
   .mo-dau {
-    padding: var(--khoang-cach-lon) 0;
+    padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
+    text-align: center;
+  }
+  .huy-hieu {
+    display: inline-block;
+    background: var(--mau-vien);
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+  .mo-dau h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
   }
   .luoi-du-an {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: var(--khoang-cach-vua);
     padding-bottom: var(--khoang-cach-lon);
   }
@@ -45,12 +59,13 @@ const du_an = (await getCollection('posts')).sort(
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
   }
   .noi-dung-the {
-    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+    padding: var(--khoang-cach-vua);
   }
   .noi-dung-the h3 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 </style>

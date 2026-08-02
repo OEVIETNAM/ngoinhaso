@@ -1,28 +1,27 @@
-/* theme.css — RIENG theo tung nhanh theme.
-   Day la ban "toi gian" dung lam vi du tham chieu tren nhanh `chuan`.
-   Cac nhanh theme thuc (theme-toi-gian, theme-tap-chi, theme-nang-dong,
-   theme-toi-mau) se thay the file nay bang gia tri rieng, GIU NGUYEN
-   ten bien — day la "hop dong bien CSS" bat buoc (muc 9 dac ta). */
+/* theme.css — theme-nang-dong (Dynamic/Playful).
+   Mau tuoi, bo goc lon, the noi bat co bong do, phu hop Store & Landing
+   ban hang, dich vu ca nhan tre trung. Giu nguyen ten bien theo hop dong
+   o dac ta muc 9. */
 
 :root {
   /* Mau sac */
-  --mau-nen: #ffffff;
-  --mau-nen-phu: #f5f5f4;
-  --mau-chu: #1c1c1c;
-  --mau-chu-nhan: #6b6b6b;
-  --mau-nhan-manh: #2b2b2b;
-  --mau-vien: #e4e4e1;
+  --mau-nen: #fffdf9;
+  --mau-nen-phu: #ffffff;
+  --mau-chu: #201f2b;
+  --mau-chu-nhan: #706e85;
+  --mau-nhan-manh: #ff5b3d;
+  --mau-vien: #ece8ff;
 
   /* Bo cuc */
-  --do-bo-goc: 4px;
-  --khoang-cach-nho: 0.5rem;
+  --do-bo-goc: 20px;
+  --khoang-cach-nho: 0.6rem;
   --khoang-cach-vua: 1.5rem;
   --khoang-cach-lon: 4rem;
-  --do-rong-noi-dung: 860px;
+  --do-rong-noi-dung: 960px;
 
-  /* Font mac dinh cua theme (khong doi theo cau hinh nguoi dung) */
-  --font-mac-dinh-than: 'Inter', sans-serif;
-  --font-mac-dinh-tieu-de: 'Inter', sans-serif;
+  /* Font mac dinh cua theme */
+  --font-mac-dinh-than: 'Nunito', sans-serif;
+  --font-mac-dinh-tieu-de: 'Baloo 2', sans-serif;
 }
 
 * {
@@ -39,7 +38,7 @@ body {
 
 h1, h2, h3 {
   font-family: var(--font-mac-dinh-tieu-de);
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 a {
@@ -54,18 +53,25 @@ a {
 
 .khoi-phu {
   background: var(--mau-nen-phu);
-  border: 1px solid var(--mau-vien);
+  border: none;
   border-radius: var(--do-bo-goc);
+  box-shadow: 0 8px 24px -12px rgba(32, 31, 43, 0.18);
+  transition: transform 0.15s ease;
+}
+
+.khoi-phu:hover {
+  transform: translateY(-3px);
 }
 
 .nut {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--do-bo-goc);
+  padding: 0.8rem 1.7rem;
+  border-radius: 999px;
   background: var(--mau-nhan-manh);
-  color: var(--mau-nen);
+  color: #fff;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 800;
+  box-shadow: 0 6px 16px -6px rgba(255, 91, 61, 0.55);
 }
 
 .chu-mo {
