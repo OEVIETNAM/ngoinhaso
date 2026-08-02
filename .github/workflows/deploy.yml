@@ -1,0 +1,65 @@
+name: Xay dung va xuat ban
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  xay_dung:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # can 2 commit de so sanh diff o buoc sau
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  xuat_ban:
+    needs: xay_dung
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  kiem_tra_bai_moi:
+    needs: xuat_ban
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Kiem tra thay doi trong content/posts
+        id: kiem_tra
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q '^src/content/posts/'; then
+            echo "co_bai_moi=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "co_bai_moi=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Bao cho nen tang co bai moi
+        if: steps.kiem_tra.outputs.co_bai_moi == 'true'
+        run: |
+          curl -X POST "$CLOUD_FUNCTION_URL/thong-bao-bai-moi" \
+            -H "Authorization: Bearer $KHOA_BI_MAT" \
+            -H "Content-Type: application/json" \
+            -d "{\"username\": \"${{ github.repository_owner }}\"}"
+        env:
+          CLOUD_FUNCTION_URL: https://dia-chi-cloud-function-thuc-te
+          KHOA_BI_MAT: ${{ secrets.PLATFORM_WEBHOOK_SECRET }}

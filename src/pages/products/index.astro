@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const san_pham = await getCollection('products');
+
+function dinh_dang_gia(gia: number, don_vi: string) {
+  if (don_vi === 'VND') {
+    return gia.toLocaleString('vi-VN') + ' đ';
+  }
+  return `${gia.toLocaleString('vi-VN')} ${don_vi}`;
+}
+---
+
+<BaseLayout tieu_de="Sản phẩm">
+  <section class="trang-san-pham">
+    <h1>Sản phẩm</h1>
+    <div class="luoi-san-pham">
+      {san_pham.map((sp) => (
+        <div class="the-san-pham khoi-phu">
+          <img src={sp.data.anh} alt={sp.data.ten_san_pham} />
+          <div class="noi-dung-the">
+            <h3>{sp.data.ten_san_pham}</h3>
+            <p class="gia">{dinh_dang_gia(sp.data.gia, sp.data.don_vi_tien)}</p>
+            {sp.data.mo_ta && <p class="chu-mo">{sp.data.mo_ta}</p>}
+          </div>
+        </div>
+      ))}
+      {san_pham.length === 0 && <p class="chu-mo">Chưa có sản phẩm nào.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .trang-san-pham {
+    padding: var(--khoang-cach-lon) 0;
+  }
+  .luoi-san-pham {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--khoang-cach-vua);
+  }
+  .the-san-pham {
+    overflow: hidden;
+  }
+  .the-san-pham img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .noi-dung-the {
+    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+  }
+  .noi-dung-the h3 {
+    margin: 0 0 0.25rem;
+  }
+  .gia {
+    font-weight: 700;
+    color: var(--mau-nhan-manh);
+  }
+</style>

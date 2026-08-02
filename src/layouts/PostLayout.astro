@@ -1,0 +1,78 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { lay_duong_dan_google_fonts } from '../data/danh_sach_font';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: Date;
+    tags: string[];
+    cover?: string;
+    font: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const duong_dan_font = lay_duong_dan_google_fonts(frontmatter.font);
+const ngay_hien_thi = new Date(frontmatter.date).toLocaleDateString('vi-VN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout tieu_de={frontmatter.title}>
+  <!-- Nap dung 1 font Google Fonts can cho bai viet nay (khong nap ca 20 font).
+       Dat truc tiep o day (khong phai <head>) vi BaseLayout khong co named
+       slot cho <head> — trinh duyet van tai va ap dung binh thuong. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href={duong_dan_font} rel="stylesheet" />
+
+  <article class="bai-viet">
+    {frontmatter.cover && (
+      <img class="anh-bia" src={frontmatter.cover} alt={frontmatter.title} />
+    )}
+    <h1>{frontmatter.title}</h1>
+    <p class="chu-mo meta-bai-viet">
+      {ngay_hien_thi}
+      {frontmatter.tags.length > 0 && (
+        <>
+          {' · '}
+          {frontmatter.tags.join(', ')}
+        </>
+      )}
+    </p>
+
+    <!-- Chi vung noi dung bai viet doi font, khung site (menu/footer) van
+         theo font mac dinh cua theme (BaseLayout) -->
+    <div class={`noi-dung font-${frontmatter.font}`}>
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .bai-viet {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .anh-bia {
+    width: 100%;
+    border-radius: var(--do-bo-goc);
+    margin-bottom: var(--khoang-cach-vua);
+  }
+  .meta-bai-viet {
+    margin-top: 0;
+    margin-bottom: var(--khoang-cach-lon);
+  }
+  .noi-dung :global(img) {
+    max-width: 100%;
+    border-radius: var(--do-bo-goc);
+  }
+  .noi-dung :global(blockquote) {
+    border-left: 3px solid var(--mau-vien);
+    margin-left: 0;
+    padding-left: var(--khoang-cach-vua);
+    color: var(--mau-chu-nhan);
+  }
+</style>

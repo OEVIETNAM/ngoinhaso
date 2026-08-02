@@ -1,0 +1,50 @@
+---
+import '../styles/theme.css';
+import '../styles/fonts.css';
+import TheMenu from '../components/TheMenu.astro';
+import TheFooter from '../components/TheFooter.astro';
+import { site_config } from '../site.config';
+
+interface Props {
+  tieu_de?: string;
+  mo_ta?: string;
+}
+
+const { tieu_de, mo_ta } = Astro.props;
+const tieu_de_day_du = tieu_de
+  ? `${tieu_de} — ${site_config.ten_hien_thi}`
+  : `${site_config.ten_hien_thi} — ${site_config.mo_ta_ngan}`;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{tieu_de_day_du}</title>
+    <meta name="description" content={mo_ta ?? site_config.mo_ta_ngan} />
+
+    {site_config.google_analytics_id && (
+      <>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${site_config.google_analytics_id}`}
+        ></script>
+        <script is:inline define:vars={{ id_ga: site_config.google_analytics_id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', id_ga);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <TheMenu />
+    <main class="khung-noi-dung">
+      <slot />
+    </main>
+    <TheFooter />
+  </body>
+</html>

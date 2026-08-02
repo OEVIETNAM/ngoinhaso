@@ -1,0 +1,84 @@
+---
+import { site_config } from '../../site.config';
+---
+
+<section id="gioi-thieu" class="khoi-hero">
+  <h1>{site_config.ten_hien_thi}</h1>
+  <p class="mo-ta-lon">{site_config.mo_ta_ngan}</p>
+  <p class="chu-mo">{site_config.loi_chao}</p>
+  <a class="nut" href="#lien-he">Liên hệ ngay</a>
+</section>
+
+<section id="dich-vu" class="khoi-dich-vu">
+  <h2>Dịch vụ / Tính năng</h2>
+  <div class="luoi-dich-vu">
+    <div class="the khoi-phu">
+      <h3>Chất lượng</h3>
+      <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng đầu tiên.</p>
+    </div>
+    <div class="the khoi-phu">
+      <h3>Tận tâm</h3>
+      <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ hai.</p>
+    </div>
+    <div class="the khoi-phu">
+      <h3>Nhanh chóng</h3>
+      <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ ba.</p>
+    </div>
+  </div>
+</section>
+
+<section class="khoi-cta khoi-phu">
+  <h2>Sẵn sàng bắt đầu?</h2>
+  <a class="nut" href="#lien-he">Liên hệ với {site_config.ten_hien_thi}</a>
+</section>
+
+<section id="lien-he" class="khoi-lien-he">
+  <h2>Liên hệ</h2>
+  <ul>
+    {site_config.lien_he.email && <li>Email: {site_config.lien_he.email}</li>}
+    {site_config.lien_he.dien_thoai && <li>Điện thoại: {site_config.lien_he.dien_thoai}</li>}
+    {site_config.lien_he.mang_xa_hoi?.map((mang) => (
+      <li><a href={mang.duong_dan} target="_blank" rel="noopener noreferrer">{mang.ten}</a></li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .khoi-hero {
+    padding: var(--khoang-cach-lon) 0;
+    text-align: center;
+  }
+  .mo-ta-lon {
+    font-size: 1.25rem;
+    color: var(--mau-nhan-manh);
+  }
+  .khoi-dich-vu {
+    padding: var(--khoang-cach-lon) 0;
+  }
+  .luoi-dich-vu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--khoang-cach-vua);
+  }
+  .the {
+    padding: var(--khoang-cach-vua);
+  }
+  .the h3 {
+    margin-top: 0;
+  }
+  .khoi-cta {
+    text-align: center;
+    padding: var(--khoang-cach-lon) var(--khoang-cach-vua);
+    margin: var(--khoang-cach-lon) 0;
+  }
+  .khoi-lien-he {
+    padding-bottom: var(--khoang-cach-lon);
+  }
+  .khoi-lien-he ul {
+    list-style: none;
+    padding: 0;
+  }
+  .khoi-lien-he li {
+    margin-bottom: var(--khoang-cach-nho);
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PortfolioHome from '../components/home/PortfolioHome.astro';
+import BlogHome from '../components/home/BlogHome.astro';
+import StoreHome from '../components/home/StoreHome.astro';
+import LandingHome from '../components/home/LandingHome.astro';
+import { site_config } from '../site.config';
+
+const ban_do_trang_chu = {
+  portfolio: PortfolioHome,
+  blog: BlogHome,
+  store: StoreHome,
+  landingpage: LandingHome,
+};
+
+const TrangChu =
+  ban_do_trang_chu[site_config.loai_trang as keyof typeof ban_do_trang_chu] ?? BlogHome; // "khac" -> mac dinh Blog
+---
+
+<BaseLayout>
+  <TrangChu />
+</BaseLayout>

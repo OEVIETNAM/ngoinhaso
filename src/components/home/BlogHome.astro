@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import { site_config } from '../../site.config';
+
+const bai_viet = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<section class="mo-dau">
+  <h1>{site_config.ten_hien_thi}</h1>
+  <p class="chu-mo">{site_config.loi_chao}</p>
+</section>
+
+<section class="danh-sach-bai">
+  {bai_viet.map((bai) => (
+    <a class="the-bai-viet khoi-phu" href={`/blog/${bai.slug}`}>
+      {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
+      <div class="noi-dung-the">
+        <h2>{bai.data.title}</h2>
+        <p class="chu-mo">
+          {new Date(bai.data.date).toLocaleDateString('vi-VN')}
+          {bai.data.tags.length > 0 && ` · ${bai.data.tags.join(', ')}`}
+        </p>
+      </div>
+    </a>
+  ))}
+  {bai_viet.length === 0 && <p class="chu-mo">Chưa có bài viết nào.</p>}
+</section>
+
+<style>
+  .mo-dau {
+    padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
+  }
+  .danh-sach-bai {
+    display: flex;
+    flex-direction: column;
+    gap: var(--khoang-cach-vua);
+    padding-bottom: var(--khoang-cach-lon);
+  }
+  .the-bai-viet {
+    display: flex;
+    gap: var(--khoang-cach-vua);
+    text-decoration: none;
+    color: var(--mau-chu);
+    overflow: hidden;
+  }
+  .the-bai-viet img {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: var(--do-bo-goc);
+  }
+  .noi-dung-the {
+    padding: var(--khoang-cach-nho);
+  }
+  .noi-dung-the h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.15rem;
+  }
+</style>

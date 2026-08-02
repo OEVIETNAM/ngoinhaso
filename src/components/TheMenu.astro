@@ -1,0 +1,54 @@
+---
+import { site_config } from '../site.config';
+
+const la_landingpage = site_config.loai_trang === 'landingpage';
+const la_store = site_config.loai_trang === 'store';
+---
+
+<header class="thanh-menu khung-noi-dung">
+  <a class="ten-trang" href="/">{site_config.ten_hien_thi}</a>
+
+  {la_landingpage ? (
+    // Landing page: chi co neo-cuon trong 1 trang, khong co menu nhieu trang
+    <nav class="danh-sach-lien-ket">
+      <a href="#gioi-thieu">Giới thiệu</a>
+      <a href="#dich-vu">Dịch vụ</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
+  ) : (
+    <nav class="danh-sach-lien-ket">
+      <a href="/">Trang chủ</a>
+      {la_store && <a href="/products">Sản phẩm</a>}
+      <a href="/about">Giới thiệu</a>
+      <a href="/contact">Liên hệ</a>
+    </nav>
+  )}
+</header>
+
+<style>
+  .thanh-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--khoang-cach-vua);
+    padding-bottom: var(--khoang-cach-vua);
+    gap: var(--khoang-cach-vua);
+  }
+  .ten-trang {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--mau-chu);
+  }
+  .danh-sach-lien-ket {
+    display: flex;
+    gap: var(--khoang-cach-vua);
+    flex-wrap: wrap;
+  }
+  .danh-sach-lien-ket a {
+    text-decoration: none;
+    color: var(--mau-chu);
+  }
+  .danh-sach-lien-ket a:hover {
+    color: var(--mau-nhan-manh);
+  }
+</style>

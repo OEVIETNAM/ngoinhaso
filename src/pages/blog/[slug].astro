@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const bai_viet = await getCollection('posts');
+  return bai_viet.map((bai) => ({
+    params: { slug: bai.slug },
+    props: { bai },
+  }));
+}
+
+const { bai } = Astro.props;
+const { Content } = await bai.render();
+---
+
+<PostLayout frontmatter={bai.data}>
+  <Content />
+</PostLayout>

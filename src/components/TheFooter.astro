@@ -1,0 +1,54 @@
+---
+import { site_config } from '../site.config';
+
+const nam_hien_tai = new Date().getFullYear();
+const co_lien_he =
+  site_config.lien_he.email ||
+  site_config.lien_he.dien_thoai ||
+  (site_config.lien_he.mang_xa_hoi && site_config.lien_he.mang_xa_hoi.length > 0);
+---
+
+<footer class="chan-trang khung-noi-dung">
+  {co_lien_he && (
+    <div class="hang-lien-he">
+      {site_config.lien_he.email && (
+        <a href={`mailto:${site_config.lien_he.email}`}>{site_config.lien_he.email}</a>
+      )}
+      {site_config.lien_he.dien_thoai && <span>{site_config.lien_he.dien_thoai}</span>}
+      {site_config.lien_he.mang_xa_hoi?.map((mang) => (
+        <a href={mang.duong_dan} target="_blank" rel="noopener noreferrer">{mang.ten}</a>
+      ))}
+    </div>
+  )}
+  <p class="chu-mo">
+    © {nam_hien_tai} {site_config.ten_hien_thi} — xây dựng bằng Ngôi nhà số của tôi
+  </p>
+</footer>
+
+<style>
+  .chan-trang {
+    margin-top: var(--khoang-cach-lon);
+    padding-top: var(--khoang-cach-vua);
+    padding-bottom: var(--khoang-cach-lon);
+    border-top: 1px solid var(--mau-vien);
+  }
+  .hang-lien-he {
+    display: flex;
+    gap: var(--khoang-cach-vua);
+    flex-wrap: wrap;
+    margin-bottom: var(--khoang-cach-nho);
+  }
+  .hang-lien-he a,
+  .hang-lien-he span {
+    color: var(--mau-chu);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .hang-lien-he a:hover {
+    color: var(--mau-nhan-manh);
+  }
+  .chu-mo {
+    font-size: 0.85rem;
+    margin: 0;
+  }
+</style>

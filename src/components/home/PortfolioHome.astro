@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import { site_config } from '../../site.config';
+
+const du_an = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<section class="mo-dau">
+  <h1>{site_config.ten_hien_thi}</h1>
+  <p class="chu-mo">{site_config.loi_chao}</p>
+</section>
+
+<section class="luoi-du-an">
+  {du_an.map((bai) => (
+    <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
+      {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
+      <div class="noi-dung-the">
+        <h3>{bai.data.title}</h3>
+      </div>
+    </a>
+  ))}
+  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào được đăng.</p>}
+</section>
+
+<style>
+  .mo-dau {
+    padding: var(--khoang-cach-lon) 0;
+  }
+  .luoi-du-an {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--khoang-cach-vua);
+    padding-bottom: var(--khoang-cach-lon);
+  }
+  .the-du-an {
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--mau-chu);
+  }
+  .the-du-an img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+  .noi-dung-the {
+    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+  }
+  .noi-dung-the h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+</style>

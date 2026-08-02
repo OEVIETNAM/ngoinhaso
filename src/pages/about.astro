@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site_config } from '../site.config';
+
+// Noi dung trang nay se duoc app ghi de (dang Markdown -> render) sau khao
+// sat FR-09; ban tam thoi nay dung truc tiep site_config de khong lo trang trong.
+---
+
+<BaseLayout tieu_de="Giới thiệu">
+  <article class="trang-don">
+    <h1>Giới thiệu</h1>
+    <p>{site_config.loi_chao}</p>
+    <p class="chu-mo">{site_config.mo_ta_ngan}</p>
+  </article>
+</BaseLayout>
+
+<style>
+  .trang-don {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--khoang-cach-lon) 0;
+  }
+</style>

@@ -1,0 +1,30 @@
+/* fonts.css — GIONG HET o moi nhanh theme, khong duoc sua rieng le.
+   20 class tuong ung 20 font da chot o SRS FR-08b.
+   Font duoc nap qua Google Fonts CDN bang the <link> chen trong
+   PostLayout.astro (chi nap dung 1 font can dung cho bai viet dang xem,
+   khong nap ca 20 font cung luc). File nay chi dinh nghia phan
+   font-family de gan class .font-{ten-khong-dau} vao noi dung. */
+
+/* --- 10 font pho bien, de doc (dung cho than bai viet) --- */
+.font-inter            { font-family: 'Inter', sans-serif; }
+.font-roboto           { font-family: 'Roboto', sans-serif; }
+.font-open-sans        { font-family: 'Open Sans', sans-serif; }
+.font-noto-sans        { font-family: 'Noto Sans', sans-serif; }
+.font-be-vietnam-pro   { font-family: 'Be Vietnam Pro', sans-serif; }
+.font-lato             { font-family: 'Lato', sans-serif; }
+.font-nunito           { font-family: 'Nunito', sans-serif; }
+.font-mulish           { font-family: 'Mulish', sans-serif; }
+.font-source-sans-3    { font-family: 'Source Sans 3', sans-serif; }
+.font-montserrat       { font-family: 'Montserrat', sans-serif; }
+
+/* --- 10 font dep/noi bat (dung cho tieu de, tao phong cach rieng) --- */
+.font-playfair-display   { font-family: 'Playfair Display', serif; }
+.font-lora                { font-family: 'Lora', serif; }
+.font-merriweather        { font-family: 'Merriweather', serif; }
+.font-cormorant-garamond  { font-family: 'Cormorant Garamond', serif; }
+.font-josefin-sans        { font-family: 'Josefin Sans', sans-serif; }
+.font-quicksand           { font-family: 'Quicksand', sans-serif; }
+.font-comfortaa            { font-family: 'Comfortaa', sans-serif; }
+.font-baloo-2              { font-family: 'Baloo 2', sans-serif; }
+.font-bitter               { font-family: 'Bitter', serif; }
+.font-crimson-pro          { font-family: 'Crimson Pro', serif; }
