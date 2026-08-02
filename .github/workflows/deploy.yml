@@ -1,6 +1,6 @@
 name: Xay dung va xuat ban
 on:
-  push: {}
+  push:
 
 permissions:
   contents: read
