@@ -1,28 +1,26 @@
-/* theme.css — RIENG theo tung nhanh theme.
-   Day la ban "toi gian" dung lam vi du tham chieu tren nhanh `chuan`.
-   Cac nhanh theme thuc (theme-toi-gian, theme-tap-chi, theme-nang-dong,
-   theme-toi-mau) se thay the file nay bang gia tri rieng, GIU NGUYEN
-   ten bien — day la "hop dong bien CSS" bat buoc (muc 9 dac ta). */
+/* theme.css — theme-tap-chi (Editorial/Magazine).
+   Tieu de lon kieu serif, bo cuc theo luoi bao, hop Blog & Portfolio
+   nhiep anh/viet lach. Giu nguyen ten bien theo hop dong o dac ta muc 9. */
 
 :root {
   /* Mau sac */
-  --mau-nen: #ffffff;
-  --mau-nen-phu: #f5f5f4;
-  --mau-chu: #1c1c1c;
-  --mau-chu-nhan: #6b6b6b;
-  --mau-nhan-manh: #2b2b2b;
-  --mau-vien: #e4e4e1;
+  --mau-nen: #faf8f4;
+  --mau-nen-phu: #ffffff;
+  --mau-chu: #1a1a17;
+  --mau-chu-nhan: #7a7568;
+  --mau-nhan-manh: #a3341f;
+  --mau-vien: #ddd6c9;
 
   /* Bo cuc */
-  --do-bo-goc: 4px;
-  --khoang-cach-nho: 0.5rem;
-  --khoang-cach-vua: 1.5rem;
-  --khoang-cach-lon: 4rem;
-  --do-rong-noi-dung: 860px;
+  --do-bo-goc: 0px;
+  --khoang-cach-nho: 0.6rem;
+  --khoang-cach-vua: 1.75rem;
+  --khoang-cach-lon: 4.5rem;
+  --do-rong-noi-dung: 1040px;
 
-  /* Font mac dinh cua theme (khong doi theo cau hinh nguoi dung) */
-  --font-mac-dinh-than: 'Inter', sans-serif;
-  --font-mac-dinh-tieu-de: 'Inter', sans-serif;
+  /* Font mac dinh cua theme */
+  --font-mac-dinh-than: 'Source Sans 3', sans-serif;
+  --font-mac-dinh-tieu-de: 'Playfair Display', serif;
 }
 
 * {
@@ -34,12 +32,14 @@ body {
   background: var(--mau-nen);
   color: var(--mau-chu);
   font-family: var(--font-mac-dinh-than);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 h1, h2, h3 {
   font-family: var(--font-mac-dinh-tieu-de);
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 a {
@@ -54,18 +54,20 @@ a {
 
 .khoi-phu {
   background: var(--mau-nen-phu);
-  border: 1px solid var(--mau-vien);
-  border-radius: var(--do-bo-goc);
+  border-top: 3px solid var(--mau-nhan-manh);
 }
 
 .nut {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
+  padding: 0.7rem 1.4rem;
   border-radius: var(--do-bo-goc);
   background: var(--mau-nhan-manh);
-  color: var(--mau-nen);
+  color: #fff;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
 }
 
 .chu-mo {

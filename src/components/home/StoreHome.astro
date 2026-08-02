@@ -13,15 +13,16 @@ function dinh_dang_gia(gia: number, don_vi: string) {
 ---
 
 <section class="mo-dau">
+  <p class="nhan-chuyen-muc">{site_config.mo_ta_ngan}</p>
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
-<section class="luoi-san-pham">
+<section class="luoi-tap-chi-san-pham">
   {san_pham.map((sp) => (
-    <div class="the-san-pham khoi-phu">
+    <div class="o-san-pham khoi-phu">
       <img src={sp.data.anh} alt={sp.data.ten_san_pham} />
-      <div class="noi-dung-the">
+      <div class="nhan-du-an">
         <h3>{sp.data.ten_san_pham}</h3>
         <p class="gia">{dinh_dang_gia(sp.data.gia, sp.data.don_vi_tien)}</p>
       </div>
@@ -32,27 +33,40 @@ function dinh_dang_gia(gia: number, don_vi: string) {
 
 <style>
   .mo-dau {
-    padding: var(--khoang-cach-lon) 0;
+    padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
+    border-bottom: 1px solid var(--mau-vien);
   }
-  .luoi-san-pham {
+  .nhan-chuyen-muc {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--mau-nhan-manh);
+    font-weight: 700;
+  }
+  .mo-dau h1 {
+    font-size: 2.75rem;
+    margin: 0.4rem 0;
+  }
+  .luoi-tap-chi-san-pham {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--khoang-cach-vua);
-    padding-bottom: var(--khoang-cach-lon);
+    padding: var(--khoang-cach-vua) 0 var(--khoang-cach-lon);
   }
-  .the-san-pham {
+  .o-san-pham {
+    position: relative;
     overflow: hidden;
   }
-  .the-san-pham img {
+  .o-san-pham img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
     display: block;
   }
-  .noi-dung-the {
-    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+  .nhan-du-an {
+    padding: var(--khoang-cach-nho) 0.2rem;
   }
-  .noi-dung-the h3 {
+  .nhan-du-an h3 {
     margin: 0 0 0.25rem;
     font-size: 1rem;
   }
@@ -60,5 +74,8 @@ function dinh_dang_gia(gia: number, don_vi: string) {
     margin: 0;
     font-weight: 700;
     color: var(--mau-nhan-manh);
+  }
+  @media (max-width: 900px) {
+    .luoi-tap-chi-san-pham { grid-template-columns: repeat(2, 1fr); }
   }
 </style>

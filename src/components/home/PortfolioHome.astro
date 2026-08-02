@@ -8,49 +8,80 @@ const du_an = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
+  <p class="nhan-chuyen-muc">{site_config.mo_ta_ngan}</p>
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
-<section class="luoi-du-an">
-  {du_an.map((bai) => (
-    <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
+<section class="luoi-tap-chi">
+  {du_an.map((bai, chi_so) => (
+    <a
+      class={`o-du-an khoi-phu ${chi_so === 0 ? 'o-lon' : ''}`}
+      href={`/blog/${bai.slug}`}
+    >
       {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
-      <div class="noi-dung-the">
+      <div class="nhan-du-an">
         <h3>{bai.data.title}</h3>
       </div>
     </a>
   ))}
-  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào được đăng.</p>}
+  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào.</p>}
 </section>
 
 <style>
   .mo-dau {
-    padding: var(--khoang-cach-lon) 0;
+    padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
+    border-bottom: 1px solid var(--mau-vien);
   }
-  .luoi-du-an {
+  .nhan-chuyen-muc {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--mau-nhan-manh);
+    font-weight: 700;
+  }
+  .mo-dau h1 {
+    font-size: 2.75rem;
+    margin: 0.4rem 0;
+  }
+  .luoi-tap-chi {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px;
     gap: var(--khoang-cach-vua);
-    padding-bottom: var(--khoang-cach-lon);
+    padding: var(--khoang-cach-vua) 0 var(--khoang-cach-lon);
   }
-  .the-du-an {
+  .o-du-an {
+    position: relative;
     display: block;
     overflow: hidden;
     text-decoration: none;
-    color: var(--mau-chu);
   }
-  .the-du-an img {
+  .o-lon {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .o-du-an img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
     object-fit: cover;
     display: block;
   }
-  .noi-dung-the {
+  .nhan-du-an {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
     padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
   }
-  .noi-dung-the h3 {
+  .nhan-du-an h3 {
+    color: #fff;
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.15rem;
+  }
+  @media (max-width: 760px) {
+    .luoi-tap-chi { grid-template-columns: 1fr; }
+    .o-lon { grid-column: span 1; grid-row: span 1; }
   }
 </style>
