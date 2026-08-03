@@ -1,12 +1,13 @@
 ---
 import { site_config } from '../site.config';
+import { duong_dan } from '../lib/duong_dan';
 
 const la_landingpage = site_config.loai_trang === 'landingpage';
 const la_store = site_config.loai_trang === 'store';
 ---
 
 <header class="thanh-menu khung-noi-dung">
-  <a class="ten-trang" href="/">{site_config.ten_hien_thi}</a>
+  <a class="ten-trang" href={duong_dan()}>{site_config.ten_hien_thi}</a>
 
   {la_landingpage ? (
     // Landing page: chi co neo-cuon trong 1 trang, khong co menu nhieu trang
@@ -17,10 +18,10 @@ const la_store = site_config.loai_trang === 'store';
     </nav>
   ) : (
     <nav class="danh-sach-lien-ket">
-      <a href="/">Trang chủ</a>
-      {la_store && <a href="/products">Sản phẩm</a>}
-      <a href="/about">Giới thiệu</a>
-      <a href="/contact">Liên hệ</a>
+      <a href={duong_dan()}>Trang chủ</a>
+      {la_store && <a href={duong_dan('products')}>Sản phẩm</a>}
+      <a href={duong_dan('about')}>Giới thiệu</a>
+      <a href={duong_dan('contact')}>Liên hệ</a>
     </nav>
   )}
 </header>

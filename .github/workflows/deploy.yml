@@ -19,7 +19,18 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Tinh duong dan goc (base path) tu ten repo
+        id: duong_dan_goc
+        run: |
+          TEN_REPO="${{ github.event.repository.name }}"
+          if [[ "$TEN_REPO" == *.github.io ]]; then
+            echo "gia_tri=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "gia_tri=/$TEN_REPO/" >> "$GITHUB_OUTPUT"
+          fi
       - run: npm run build
+        env:
+          PUBLIC_BASE_PATH: ${{ steps.duong_dan_goc.outputs.gia_tri }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist

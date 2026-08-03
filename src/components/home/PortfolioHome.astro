@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { duong_dan } from '../../lib/duong_dan';
 import { site_config } from '../../site.config';
 
 const du_an = (await getCollection('posts')).sort(
@@ -14,7 +15,7 @@ const du_an = (await getCollection('posts')).sort(
 
 <section class="luoi-du-an">
   {du_an.map((bai) => (
-    <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
+    <a class="the-du-an khoi-phu" href={duong_dan(`blog/${bai.slug}`)}>
       {bai.data.cover && (
         <div class="khung-anh">
           <img src={bai.data.cover} alt={bai.data.title} />
