@@ -3,7 +3,7 @@ import { site_config } from '../../site.config';
 ---
 
 <section id="gioi-thieu" class="khoi-hero">
-  <h1>{site_config.ten_hien_thi}</h1>
+  <h1 class="tieu-de-sang">{site_config.ten_hien_thi}</h1>
   <p class="mo-ta-lon">{site_config.mo_ta_ngan}</p>
   <p class="chu-mo">{site_config.loi_chao}</p>
   <a class="nut" href="#lien-he">Liên hệ ngay</a>
@@ -13,14 +13,17 @@ import { site_config } from '../../site.config';
   <h2>Dịch vụ / Tính năng</h2>
   <div class="luoi-dich-vu">
     <div class="the khoi-phu">
+      <span class="so-thu-tu">01</span>
       <h3>Chất lượng</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng đầu tiên.</p>
     </div>
     <div class="the khoi-phu">
+      <span class="so-thu-tu">02</span>
       <h3>Tận tâm</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ hai.</p>
     </div>
     <div class="the khoi-phu">
+      <span class="so-thu-tu">03</span>
       <h3>Nhanh chóng</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ ba.</p>
     </div>
@@ -48,6 +51,9 @@ import { site_config } from '../../site.config';
     padding: var(--khoang-cach-lon) 0;
     text-align: center;
   }
+  .khoi-hero h1 {
+    font-size: 2.75rem;
+  }
   .mo-ta-lon {
     font-size: 1.25rem;
     color: var(--mau-nhan-manh);
@@ -63,9 +69,13 @@ import { site_config } from '../../site.config';
   .the {
     padding: var(--khoang-cach-vua);
   }
+  .so-thu-tu {
+    font-family: var(--font-mac-dinh-tieu-de);
+    font-size: 1.5rem;
+    color: var(--mau-nhan-manh);
+  }
   .the h3 {
     margin-top: 0;
-    color: var(--mau-nhan-manh);
   }
   .khoi-cta {
     text-align: center;

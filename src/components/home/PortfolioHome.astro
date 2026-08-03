@@ -8,14 +8,18 @@ const du_an = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
-  <h1>{site_config.ten_hien_thi}</h1>
+  <h1 class="tieu-de-sang">{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
 <section class="luoi-du-an">
   {du_an.map((bai) => (
     <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
-      {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
+      {bai.data.cover && (
+        <div class="khung-anh">
+          <img src={bai.data.cover} alt={bai.data.title} />
+        </div>
+      )}
       <div class="noi-dung-the">
         <h3>{bai.data.title}</h3>
       </div>
@@ -27,6 +31,9 @@ const du_an = (await getCollection('posts')).sort(
 <style>
   .mo-dau {
     padding: var(--khoang-cach-lon) 0;
+  }
+  .mo-dau h1 {
+    font-size: 2.5rem;
   }
   .luoi-du-an {
     display: grid;
@@ -40,16 +47,21 @@ const du_an = (await getCollection('posts')).sort(
     text-decoration: none;
     color: var(--mau-chu);
   }
-  .the-du-an img {
+  .khung-anh {
+    overflow: hidden;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
+  }
+  .khung-anh img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
-    filter: grayscale(20%);
-    transition: filter 0.2s ease;
+    filter: brightness(0.85) saturate(1.1);
+    transition: filter 0.2s ease, transform 0.3s ease;
   }
-  .the-du-an:hover img {
-    filter: grayscale(0%);
+  .the-du-an:hover .khung-anh img {
+    filter: brightness(1) saturate(1.2);
+    transform: scale(1.04);
   }
   .noi-dung-the {
     padding: var(--khoang-cach-nho) var(--khoang-cach-vua);

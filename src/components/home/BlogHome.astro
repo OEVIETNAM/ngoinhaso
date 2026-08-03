@@ -8,7 +8,7 @@ const bai_viet = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
-  <h1>{site_config.ten_hien_thi}</h1>
+  <h1 class="tieu-de-sang">{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
@@ -32,6 +32,9 @@ const bai_viet = (await getCollection('posts')).sort(
   .mo-dau {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
   }
+  .mo-dau h1 {
+    font-size: 2.5rem;
+  }
   .danh-sach-bai {
     display: flex;
     flex-direction: column;
@@ -50,9 +53,10 @@ const bai_viet = (await getCollection('posts')).sort(
     height: 110px;
     object-fit: cover;
     flex-shrink: 0;
+    border-radius: var(--do-bo-goc) 0 0 var(--do-bo-goc);
   }
   .noi-dung-the {
-    padding: var(--khoang-cach-nho);
+    padding: var(--khoang-cach-nho) var(--khoang-cach-vua) var(--khoang-cach-nho) 0;
   }
   .noi-dung-the h2 {
     margin: 0 0 0.25rem;

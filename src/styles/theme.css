@@ -1,24 +1,22 @@
-/* theme.css — theme-toi-mau (Dark mode).
-   Nen toi, diem nhan sang ro, phu hop portfolio ca nhan / dev / thiet ke.
-   Giu nguyen ten bien theo hop dong o dac ta muc 9. */
+/* theme.css — theme-toi-mau (nang cap).
+   Nen toi nhieu lop, diem nhan tim phat sang (glow), tieu de gradient,
+   nen luoi cham nhe kieu "dev portfolio". Giu nguyen ten bien theo
+   hop dong o dac ta muc 9. */
 
 :root {
-  /* Mau sac */
-  --mau-nen: #0e0e12;
-  --mau-nen-phu: #17171d;
-  --mau-chu: #ededf0;
-  --mau-chu-nhan: #9a9aa5;
-  --mau-nhan-manh: #7c5cff;
-  --mau-vien: #2a2a33;
+  --mau-nen: #0b0b0f;
+  --mau-nen-phu: #141419;
+  --mau-chu: #f0f0f3;
+  --mau-chu-nhan: #9a9aa8;
+  --mau-nhan-manh: #8b6bff;
+  --mau-vien: #26262f;
 
-  /* Bo cuc */
-  --do-bo-goc: 10px;
+  --do-bo-goc: 12px;
   --khoang-cach-nho: 0.5rem;
   --khoang-cach-vua: 1.5rem;
   --khoang-cach-lon: 4rem;
-  --do-rong-noi-dung: 900px;
+  --do-rong-noi-dung: 920px;
 
-  /* Font mac dinh cua theme */
   --font-mac-dinh-than: 'Inter', sans-serif;
   --font-mac-dinh-tieu-de: 'Josefin Sans', sans-serif;
 }
@@ -29,7 +27,10 @@
 
 body {
   margin: 0;
-  background: var(--mau-nen);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(139, 107, 255, 0.12), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(139, 107, 255, 0.08), transparent 35%),
+    var(--mau-nen);
   color: var(--mau-chu);
   font-family: var(--font-mac-dinh-than);
   line-height: 1.6;
@@ -54,24 +55,38 @@ a {
   background: var(--mau-nen-phu);
   border: 1px solid var(--mau-vien);
   border-radius: var(--do-bo-goc);
-  transition: border-color 0.15s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .khoi-phu:hover {
   border-color: var(--mau-nhan-manh);
+  box-shadow: 0 0 32px -8px rgba(139, 107, 255, 0.35);
 }
 
 .nut {
   display: inline-block;
-  padding: 0.65rem 1.3rem;
+  padding: 0.7rem 1.4rem;
   border-radius: var(--do-bo-goc);
   background: var(--mau-nhan-manh);
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 0 24px -4px rgba(124, 92, 255, 0.5);
+  box-shadow: 0 0 28px -6px rgba(139, 107, 255, 0.55);
+  transition: box-shadow 0.2s ease;
+}
+
+.nut:hover {
+  box-shadow: 0 0 40px -6px rgba(139, 107, 255, 0.75);
 }
 
 .chu-mo {
   color: var(--mau-chu-nhan);
+}
+
+/* Tieu de kieu gradient tim - dung o Hero cho cam giac "phat sang" */
+.tieu-de-sang {
+  background: linear-gradient(90deg, var(--mau-chu) 30%, var(--mau-nhan-manh) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
