@@ -1,11 +1,18 @@
 import { defineConfig } from 'astro/config';
 
-// Repo mau nay se duoc app fork va doi ten thanh "{username}.github.io"
-// (user site cua GitHub Pages) => site duoc phuc vu tai goc domain,
-// khong can cau hinh "base". Neu sau nay dung cho project page (repo thuong,
-// khong phai user site) thi can them "base: '/ten-repo/'".
+// Duong dan goc (base) PHAI duoc xac dinh dung, vi repo mau nay co the
+// duoc fork thanh 2 kieu site khac nhau tren GitHub Pages:
+//  - "User site":    repo ten "{username}.github.io"  -> site o GOC domain, base = "/"
+//  - "Project site":  repo ten bat ky (vd "ngoinhaso")  -> site o /ten-repo/, base = "/ten-repo/"
+// Vi ten repo chi biet duoc luc fork (khong biet truoc khi viet code mau
+// nay), gia tri nay duoc GitHub Actions TU TINH va truyen vao qua bien moi
+// truong PUBLIC_BASE_PATH ngay truoc buoc build (xem .github/workflows/deploy.yml).
+// Khi chay "npm run dev"/"npm run build" tren may ca nhan (khong qua Actions),
+// bien nay khong duoc dat => mac dinh "/" (dung cho dev, xem truoc noi bo).
+const duong_dan_goc = process.env.PUBLIC_BASE_PATH || '/';
+
 export default defineConfig({
   output: 'static',
-  site: 'https://example.github.io',
+  base: duong_dan_goc,
   trailingSlash: 'ignore',
 });
