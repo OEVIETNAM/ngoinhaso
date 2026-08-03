@@ -1,5 +1,11 @@
 ---
 import { site_config } from '../../site.config';
+
+const icon_luan_phien = [
+  { icon: '💎', mau: '--mau-phu-1' },
+  { icon: '💛', mau: '--mau-phu-2' },
+  { icon: '⚡', mau: '--mau-phu-3' },
+];
 ---
 
 <section id="gioi-thieu" class="khoi-hero">
@@ -7,24 +13,24 @@ import { site_config } from '../../site.config';
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="mo-ta-lon">{site_config.mo_ta_ngan}</p>
   <p class="chu-mo">{site_config.loi_chao}</p>
-  <a class="nut" href="#lien-he">Liên hệ ngay</a>
+  <a class="nut" href="#lien-he">Liên hệ ngay 🚀</a>
 </section>
 
 <section id="dich-vu" class="khoi-dich-vu">
   <h2>Dịch vụ / Tính năng</h2>
   <div class="luoi-dich-vu">
     <div class="the khoi-phu">
-      <span class="icon-tron">💎</span>
+      <span class="icon-tron" style={`background:var(${icon_luan_phien[0].mau})`}>{icon_luan_phien[0].icon}</span>
       <h3>Chất lượng</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng đầu tiên.</p>
     </div>
     <div class="the khoi-phu">
-      <span class="icon-tron">💛</span>
+      <span class="icon-tron" style={`background:var(${icon_luan_phien[1].mau})`}>{icon_luan_phien[1].icon}</span>
       <h3>Tận tâm</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ hai.</p>
     </div>
     <div class="the khoi-phu">
-      <span class="icon-tron">⚡</span>
+      <span class="icon-tron" style={`background:var(${icon_luan_phien[2].mau})`}>{icon_luan_phien[2].icon}</span>
       <h3>Nhanh chóng</h3>
       <p class="chu-mo">Nội dung mô tả dịch vụ hoặc tính năng thứ ba.</p>
     </div>
@@ -32,15 +38,15 @@ import { site_config } from '../../site.config';
 </section>
 
 <section class="khoi-cta khoi-phu">
-  <h2>Sẵn sàng bắt đầu?</h2>
+  <h2>Sẵn sàng bắt đầu? 🎉</h2>
   <a class="nut" href="#lien-he">Liên hệ với {site_config.ten_hien_thi}</a>
 </section>
 
 <section id="lien-he" class="khoi-lien-he">
   <h2>Liên hệ</h2>
   <ul>
-    {site_config.lien_he.email && <li>Email: {site_config.lien_he.email}</li>}
-    {site_config.lien_he.dien_thoai && <li>Điện thoại: {site_config.lien_he.dien_thoai}</li>}
+    {site_config.lien_he.email && <li>📧 {site_config.lien_he.email}</li>}
+    {site_config.lien_he.dien_thoai && <li>📱 {site_config.lien_he.dien_thoai}</li>}
     {site_config.lien_he.mang_xa_hoi?.map((mang) => (
       <li><a href={mang.duong_dan} target="_blank" rel="noopener noreferrer">{mang.ten}</a></li>
     ))}
@@ -53,11 +59,6 @@ import { site_config } from '../../site.config';
     text-align: center;
   }
   .huy-hieu {
-    display: inline-block;
-    background: var(--mau-vien);
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
     margin-bottom: 0.75rem;
   }
   .khoi-hero h1 {
@@ -67,7 +68,7 @@ import { site_config } from '../../site.config';
   .mo-ta-lon {
     font-size: 1.2rem;
     color: var(--mau-nhan-manh);
-    font-weight: 700;
+    font-weight: 800;
   }
   .khoi-dich-vu {
     padding: var(--khoang-cach-lon) 0;
@@ -85,11 +86,10 @@ import { site_config } from '../../site.config';
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: var(--mau-vien);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 0.6rem;
   }
   .the h3 {

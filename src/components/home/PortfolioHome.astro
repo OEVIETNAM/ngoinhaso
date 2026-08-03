@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { site_config } from '../../site.config';
 
+const mau_luan_phien = ['--mau-phu-1', '--mau-phu-2', '--mau-phu-3'];
 const du_an = (await getCollection('posts')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
@@ -14,9 +15,11 @@ const du_an = (await getCollection('posts')).sort(
 </section>
 
 <section class="luoi-du-an">
-  {du_an.map((bai) => (
+  {du_an.map((bai, i) => (
     <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
-      {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
+      <div class="khung-anh" style={`background:var(${mau_luan_phien[i % 3]})`}>
+        {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
+      </div>
       <div class="noi-dung-the">
         <h3>{bai.data.title}</h3>
       </div>
@@ -30,17 +33,9 @@ const du_an = (await getCollection('posts')).sort(
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
     text-align: center;
   }
-  .huy-hieu {
-    display: inline-block;
-    background: var(--mau-vien);
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
-  }
   .mo-dau h1 {
     font-size: 2.4rem;
-    margin: 0 0 0.5rem;
+    margin: 0.6rem 0 0.5rem;
   }
   .luoi-du-an {
     display: grid;
@@ -54,12 +49,17 @@ const du_an = (await getCollection('posts')).sort(
     text-decoration: none;
     color: var(--mau-chu);
   }
-  .the-du-an img {
-    width: 100%;
+  .khung-anh {
     aspect-ratio: 4 / 3;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
+    overflow: hidden;
+    display: flex;
+  }
+  .khung-anh img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
   }
   .noi-dung-the {
     padding: var(--khoang-cach-vua);

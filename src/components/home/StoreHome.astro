@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { site_config } from '../../site.config';
 
+const mau_luan_phien = ['--mau-phu-1', '--mau-phu-2', '--mau-phu-3'];
 const san_pham = await getCollection('products');
 
 function dinh_dang_gia(gia: number, don_vi: string) {
@@ -19,9 +20,11 @@ function dinh_dang_gia(gia: number, don_vi: string) {
 </section>
 
 <section class="luoi-san-pham">
-  {san_pham.map((sp) => (
+  {san_pham.map((sp, i) => (
     <div class="the-san-pham khoi-phu">
-      <img src={sp.data.anh} alt={sp.data.ten_san_pham} />
+      <div class="khung-anh" style={`background:var(${mau_luan_phien[i % 3]})`}>
+        <img src={sp.data.anh} alt={sp.data.ten_san_pham} />
+      </div>
       <div class="noi-dung-the">
         <h3>{sp.data.ten_san_pham}</h3>
         <p class="gia">{dinh_dang_gia(sp.data.gia, sp.data.don_vi_tien)}</p>
@@ -36,17 +39,9 @@ function dinh_dang_gia(gia: number, don_vi: string) {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
     text-align: center;
   }
-  .huy-hieu {
-    display: inline-block;
-    background: var(--mau-vien);
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
-  }
   .mo-dau h1 {
     font-size: 2.4rem;
-    margin: 0 0 0.5rem;
+    margin: 0.6rem 0 0.5rem;
   }
   .luoi-san-pham {
     display: grid;
@@ -57,12 +52,17 @@ function dinh_dang_gia(gia: number, don_vi: string) {
   .the-san-pham {
     overflow: hidden;
   }
-  .the-san-pham img {
-    width: 100%;
+  .khung-anh {
     aspect-ratio: 1 / 1;
+    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
+    overflow: hidden;
+    display: flex;
+  }
+  .khung-anh img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: var(--do-bo-goc) var(--do-bo-goc) 0 0;
   }
   .noi-dung-the {
     padding: var(--khoang-cach-vua);

@@ -1,10 +1,9 @@
-/* theme.css — theme-nang-dong (Dynamic/Playful).
-   Mau tuoi, bo goc lon, the noi bat co bong do, phu hop Store & Landing
-   ban hang, dich vu ca nhan tre trung. Giu nguyen ten bien theo hop dong
-   o dac ta muc 9. */
+/* theme.css — theme-nang-dong (nang cap).
+   Mau tuoi, gradient nhe, sticker-badge, icon box mau sac luan phien.
+   Phu hop Store & Landing ban hang / dich vu ca nhan tre trung.
+   Giu nguyen ten bien theo hop dong o dac ta muc 9. */
 
 :root {
-  /* Mau sac */
   --mau-nen: #fffdf9;
   --mau-nen-phu: #ffffff;
   --mau-chu: #201f2b;
@@ -12,14 +11,17 @@
   --mau-nhan-manh: #ff5b3d;
   --mau-vien: #ece8ff;
 
-  /* Bo cuc */
+  /* Mau phu tro rieng cua theme nay, dung cho icon-box luan phien */
+  --mau-phu-1: #ffe8e2;
+  --mau-phu-2: #e4f4e8;
+  --mau-phu-3: #e6ecff;
+
   --do-bo-goc: 20px;
   --khoang-cach-nho: 0.6rem;
   --khoang-cach-vua: 1.5rem;
   --khoang-cach-lon: 4rem;
   --do-rong-noi-dung: 960px;
 
-  /* Font mac dinh cua theme */
   --font-mac-dinh-than: 'Nunito', sans-serif;
   --font-mac-dinh-tieu-de: 'Baloo 2', sans-serif;
 }
@@ -56,15 +58,18 @@ a {
   border: none;
   border-radius: var(--do-bo-goc);
   box-shadow: 0 8px 24px -12px rgba(32, 31, 43, 0.18);
-  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .khoi-phu:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px) rotate(-0.3deg);
+  box-shadow: 0 16px 32px -14px rgba(32, 31, 43, 0.24);
 }
 
 .nut {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.8rem 1.7rem;
   border-radius: 999px;
   background: var(--mau-nhan-manh);
@@ -72,8 +77,22 @@ a {
   text-decoration: none;
   font-weight: 800;
   box-shadow: 0 6px 16px -6px rgba(255, 91, 61, 0.55);
+  transition: transform 0.15s ease;
+}
+
+.nut:hover {
+  transform: scale(1.04);
 }
 
 .chu-mo {
   color: var(--mau-chu-nhan);
+}
+
+.huy-hieu {
+  display: inline-block;
+  background: var(--mau-vien);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
