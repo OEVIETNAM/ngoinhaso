@@ -45,21 +45,28 @@ Tìm đoạn:
 
 ```astro
 <nav class="danh-sach-lien-ket">
-  <a href="/">Trang chủ</a>
-  {la_store && <a href="/products">Sản phẩm</a>}
-  <a href="/about">Giới thiệu</a>
-  <a href="/contact">Liên hệ</a>
+  <a href={duong_dan()}>Trang chủ</a>
+  {la_store && <a href={duong_dan('products')}>Sản phẩm</a>}
+  <a href={duong_dan('about')}>Giới thiệu</a>
+  <a href={duong_dan('contact')}>Liên hệ</a>
 </nav>
 ```
 
-Muốn thêm 1 mục mới trỏ tới trang bạn tự tạo (ví dụ `/du-an`), chỉ cần
-thêm 1 dòng:
+Muốn thêm 1 mục mới trỏ tới trang bạn tự tạo (ví dụ `du-an`), thêm 1 dòng:
 
 ```astro
-<a href="/du-an">Dự án</a>
+<a href={duong_dan('du-an')}>Dự án</a>
 ```
 
-Lưu ý: đường dẫn (`href`) phải khớp với tên file trang bạn tạo ở bước 3.
+> ⚠️ **Luôn dùng `duong_dan('ten-trang')` chứ đừng viết thẳng
+> `href="/ten-trang"`.** Site của bạn có thể được phục vụ ở gốc domain
+> (`abc.github.io`) hoặc trong 1 thư mục con (`abc.github.io/ten-site/`)
+> tuỳ vào loại repo — viết thẳng `/ten-trang` sẽ **nhảy về trang gốc sai**
+> khi site nằm trong thư mục con. `duong_dan()` tự lo việc này, xem
+> `src/lib/duong_dan.ts`.
+
+Lưu ý: chuỗi truyền vào `duong_dan(...)` phải khớp với tên file trang
+bạn tạo ở bước 3.
 
 ---
 
@@ -67,7 +74,7 @@ Lưu ý: đường dẫn (`href`) phải khớp với tên file trang bạn tạ
 
 1. Vào thư mục `src/pages/`.
 2. Tạo file mới, ví dụ `du-an.astro` (tên file = đường dẫn URL, nên
-   `du-an.astro` → `/du-an`).
+   `du-an.astro` → trang "du-an").
 3. Dán nội dung mẫu sau rồi sửa lại chữ:
 
 ```astro
@@ -83,7 +90,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 ```
 
-Sau khi commit, thêm link tới trang này vào menu như bước 2.
+Sau khi commit, thêm link tới trang này vào menu như bước 2. Nếu trang
+mới có ảnh hoặc link nội bộ khác, cũng dùng `duong_dan(...)` cho mọi
+`href`/`src` trỏ tới file trong chính site này (ảnh/link bên ngoài thì
+không cần, viết URL đầy đủ bình thường).
 
 ---
 
@@ -188,3 +198,23 @@ Repo mẫu có 4 nhánh (branch) theme khác nhau: `theme-toi-gian`,
    - `src/components/home/*.astro` (cả 4 file)
 3. Commit — site sẽ build lại với giao diện mới, **nội dung bài viết/
    sản phẩm/cấu hình giữ nguyên** vì chúng nằm ở file khác.
+
+---
+
+## 10. Xử lý sự cố thường gặp
+
+**Site bấm vào link nào cũng nhảy về trang gốc / ảnh vỡ, thiếu CSS:**
+Repo của bạn đang là "project site" (tên repo không phải
+`{ten}.github.io`) nên site được phục vụ trong 1 thư mục con
+(`ten-org.github.io/ten-repo/`), không phải ở gốc domain. `deploy.yml`
+đã tự tính đường dẫn này khi build — nếu vẫn gặp lỗi, kiểm tra:
+- Bạn có tự viết `href="/..."` ở đâu đó thay vì dùng `duong_dan(...)`
+  không (xem mục 2).
+- Actions build có thành công không (tab Actions).
+
+**Đổi nhánh (theme) xong mà site không tự cập nhật:** workflow đã cấu
+hình để chạy trên **mọi nhánh được push**, không riêng `main` — mỗi lần
+push, bản build mới nhất (bất kể nhánh nào) sẽ được xuất bản. Nếu vẫn
+không thấy chạy, kiểm tra tab Actions xem có workflow run nào xuất hiện
+không; nếu không có run nào cả, khả năng cao **Settings → Pages →
+Source** chưa để đúng **"GitHub Actions"**.
