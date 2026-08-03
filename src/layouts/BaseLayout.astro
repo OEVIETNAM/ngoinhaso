@@ -4,6 +4,7 @@ import '../styles/fonts.css';
 import TheMenu from '../components/TheMenu.astro';
 import TheFooter from '../components/TheFooter.astro';
 import { site_config } from '../site.config';
+import { duong_dan } from '../lib/duong_dan';
 
 interface Props {
   tieu_de?: string;
@@ -21,7 +22,7 @@ const tieu_de_day_du = tieu_de
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={duong_dan('favicon.svg')} />
     <title>{tieu_de_day_du}</title>
     <meta name="description" content={mo_ta ?? site_config.mo_ta_ngan} />
 

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { duong_dan } from '../../lib/duong_dan';
 import { site_config } from '../../site.config';
 
 const bai_viet = (await getCollection('posts')).sort(
@@ -15,7 +16,7 @@ const bai_viet = (await getCollection('posts')).sort(
 
 <section class="danh-sach-bai">
   {bai_viet.map((bai, chi_so) => (
-    <a class="dong-bai" href={`/blog/${bai.slug}`}>
+    <a class="dong-bai" href={duong_dan(`blog/${bai.slug}`)}>
       <div class="cot-ngay">
         <span class="chu-mo">{new Date(bai.data.date).toLocaleDateString('vi-VN', { month: 'short', day: '2-digit' })}</span>
       </div>
