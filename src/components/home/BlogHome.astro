@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { duong_dan } from '../../lib/duong_dan';
 import { site_config } from '../../site.config';
 
 const mau_luan_phien = ['--mau-phu-1', '--mau-phu-2', '--mau-phu-3'];
@@ -16,7 +17,7 @@ const bai_viet = (await getCollection('posts')).sort(
 
 <section class="luoi-bai">
   {bai_viet.map((bai, i) => (
-    <a class="the-bai khoi-phu" href={`/blog/${bai.slug}`}>
+    <a class="the-bai khoi-phu" href={duong_dan(`blog/${bai.slug}`)}>
       <div class="khung-anh" style={`background:var(${mau_luan_phien[i % 3]})`}>
         {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
       </div>
