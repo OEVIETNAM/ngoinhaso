@@ -1,26 +1,23 @@
-/* theme.css — RIENG theo tung nhanh theme.
-   Day la ban "toi gian" dung lam vi du tham chieu tren nhanh `chuan`.
-   Cac nhanh theme thuc (theme-toi-gian, theme-tap-chi, theme-nang-dong,
-   theme-toi-mau) se thay the file nay bang gia tri rieng, GIU NGUYEN
-   ten bien — day la "hop dong bien CSS" bat buoc (muc 9 dac ta). */
+/* theme.css — theme-toi-gian (nang cap).
+   Van la "toi gian" nhung tinh te hon: nhip doc ro rang, vien mong,
+   nhan chu hoa nho kieu editorial-minimal, hover gach chan thay vi
+   dung khoi mau. Cam hung tu AstroPaper (blog toi gian pho bien nhat
+   trong he sinh thai Astro). Giu nguyen ten bien theo hop dong muc 9. */
 
 :root {
-  /* Mau sac */
   --mau-nen: #ffffff;
-  --mau-nen-phu: #f5f5f4;
+  --mau-nen-phu: #fafaf9;
   --mau-chu: #1c1c1c;
-  --mau-chu-nhan: #6b6b6b;
-  --mau-nhan-manh: #2b2b2b;
-  --mau-vien: #e4e4e1;
+  --mau-chu-nhan: #767672;
+  --mau-nhan-manh: #1c1c1c;
+  --mau-vien: #e7e6e1;
 
-  /* Bo cuc */
-  --do-bo-goc: 4px;
+  --do-bo-goc: 2px;
   --khoang-cach-nho: 0.5rem;
   --khoang-cach-vua: 1.5rem;
-  --khoang-cach-lon: 4rem;
-  --do-rong-noi-dung: 860px;
+  --khoang-cach-lon: 4.5rem;
+  --do-rong-noi-dung: 720px;
 
-  /* Font mac dinh cua theme (khong doi theo cau hinh nguoi dung) */
   --font-mac-dinh-than: 'Inter', sans-serif;
   --font-mac-dinh-tieu-de: 'Inter', sans-serif;
 }
@@ -34,16 +31,25 @@ body {
   background: var(--mau-nen);
   color: var(--mau-chu);
   font-family: var(--font-mac-dinh-than);
-  line-height: 1.6;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3 {
   font-family: var(--font-mac-dinh-tieu-de);
   line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 a {
-  color: var(--mau-nhan-manh);
+  color: var(--mau-chu);
+  text-decoration-color: var(--mau-vien);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: var(--mau-chu);
 }
 
 .khung-noi-dung {
@@ -60,14 +66,30 @@ a {
 
 .nut {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.3rem;
   border-radius: var(--do-bo-goc);
   background: var(--mau-nhan-manh);
   color: var(--mau-nen);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: opacity 0.15s ease;
+}
+
+.nut:hover {
+  opacity: 0.8;
 }
 
 .chu-mo {
+  color: var(--mau-chu-nhan);
+}
+
+/* Nhan chu hoa nho, dung lam "kicker" phia tren tieu de - dac trung minimal */
+.nhan-kicker {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--mau-chu-nhan);
 }

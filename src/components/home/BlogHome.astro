@@ -8,20 +8,22 @@ const bai_viet = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
+  <p class="nhan-kicker">Blog</p>
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
 <section class="danh-sach-bai">
-  {bai_viet.map((bai) => (
-    <a class="the-bai-viet khoi-phu" href={`/blog/${bai.slug}`}>
-      {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
-      <div class="noi-dung-the">
+  {bai_viet.map((bai, chi_so) => (
+    <a class="dong-bai" href={`/blog/${bai.slug}`}>
+      <div class="cot-ngay">
+        <span class="chu-mo">{new Date(bai.data.date).toLocaleDateString('vi-VN', { month: 'short', day: '2-digit' })}</span>
+      </div>
+      <div class="cot-noi-dung">
         <h2>{bai.data.title}</h2>
-        <p class="chu-mo">
-          {new Date(bai.data.date).toLocaleDateString('vi-VN')}
-          {bai.data.tags.length > 0 && ` · ${bai.data.tags.join(', ')}`}
-        </p>
+        {bai.data.tags.length > 0 && (
+          <p class="chu-mo the-nho">{bai.data.tags.join(' · ')}</p>
+        )}
       </div>
     </a>
   ))}
@@ -32,31 +34,35 @@ const bai_viet = (await getCollection('posts')).sort(
   .mo-dau {
     padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
   }
+  .mo-dau h1 {
+    font-size: 2rem;
+    margin: 0.4rem 0 0.5rem;
+  }
   .danh-sach-bai {
-    display: flex;
-    flex-direction: column;
-    gap: var(--khoang-cach-vua);
     padding-bottom: var(--khoang-cach-lon);
   }
-  .the-bai-viet {
-    display: flex;
+  .dong-bai {
+    display: grid;
+    grid-template-columns: 90px 1fr;
     gap: var(--khoang-cach-vua);
+    padding: var(--khoang-cach-vua) 0;
+    border-bottom: 1px solid var(--mau-vien);
     text-decoration: none;
     color: var(--mau-chu);
-    overflow: hidden;
   }
-  .the-bai-viet img {
-    width: 160px;
-    height: 110px;
-    object-fit: cover;
-    flex-shrink: 0;
-    border-radius: var(--do-bo-goc);
+  .dong-bai:first-child {
+    border-top: 1px solid var(--mau-vien);
   }
-  .noi-dung-the {
-    padding: var(--khoang-cach-nho);
+  .cot-ngay span {
+    font-size: 0.85rem;
+    text-transform: capitalize;
   }
-  .noi-dung-the h2 {
-    margin: 0 0 0.25rem;
+  .cot-noi-dung h2 {
+    margin: 0 0 0.3rem;
     font-size: 1.15rem;
+  }
+  .the-nho {
+    font-size: 0.85rem;
+    margin: 0;
   }
 </style>

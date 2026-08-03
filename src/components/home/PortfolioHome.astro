@@ -8,49 +8,61 @@ const du_an = (await getCollection('posts')).sort(
 ---
 
 <section class="mo-dau">
+  <p class="nhan-kicker">Portfolio</p>
   <h1>{site_config.ten_hien_thi}</h1>
   <p class="chu-mo">{site_config.loi_chao}</p>
 </section>
 
 <section class="luoi-du-an">
   {du_an.map((bai) => (
-    <a class="the-du-an khoi-phu" href={`/blog/${bai.slug}`}>
+    <a class="o-du-an" href={`/blog/${bai.slug}`}>
       {bai.data.cover && <img src={bai.data.cover} alt={bai.data.title} />}
-      <div class="noi-dung-the">
-        <h3>{bai.data.title}</h3>
-      </div>
+      <h3>{bai.data.title}</h3>
+      {bai.data.tags.length > 0 && <p class="chu-mo the-nho">{bai.data.tags.join(' · ')}</p>}
     </a>
   ))}
-  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào được đăng.</p>}
+  {du_an.length === 0 && <p class="chu-mo">Chưa có dự án nào.</p>}
 </section>
 
 <style>
   .mo-dau {
-    padding: var(--khoang-cach-lon) 0;
+    padding: var(--khoang-cach-lon) 0 var(--khoang-cach-vua);
+  }
+  .mo-dau h1 {
+    font-size: 2rem;
+    margin: 0.4rem 0 0.5rem;
   }
   .luoi-du-an {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--khoang-cach-vua);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--khoang-cach-lon) var(--khoang-cach-vua);
     padding-bottom: var(--khoang-cach-lon);
   }
-  .the-du-an {
-    display: block;
-    overflow: hidden;
+  .o-du-an {
     text-decoration: none;
     color: var(--mau-chu);
   }
-  .the-du-an img {
+  .o-du-an img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+    margin-bottom: var(--khoang-cach-nho);
+    filter: grayscale(15%);
+    transition: filter 0.2s ease;
   }
-  .noi-dung-the {
-    padding: var(--khoang-cach-nho) var(--khoang-cach-vua);
+  .o-du-an:hover img {
+    filter: grayscale(0%);
   }
-  .noi-dung-the h3 {
+  .o-du-an h3 {
+    margin: 0 0 0.2rem;
+    font-size: 1.05rem;
+  }
+  .the-nho {
+    font-size: 0.85rem;
     margin: 0;
-    font-size: 1rem;
+  }
+  @media (max-width: 560px) {
+    .luoi-du-an { grid-template-columns: 1fr; }
   }
 </style>
